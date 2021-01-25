@@ -104,23 +104,28 @@ def main():
     if len(sys.argv) != 3:
         print("Usage: ./p3.py map.csv moves.txt")
         sys.exit(1)
+    
     input_path = sys.argv[1]
     output_path = sys.argv[2]
     state = from_csv(input_path)
-    score = minimax(state, math.inf, 1)
+    player = 1
 
-    print(f"Finished with score {score[2]}\nLast Move: {score[0]}->{score[1]}")
+    # print(f"Finished with score {score[2]}\nLast Move: {score[0]}->{score[1]}")
 
-    with open(input_path, "w") as f:
-        apply_move(state, score)
-        to_csv(state, f)
+    while not game_over(state, player):
+        score = minimax(state, math.inf, player)
+        with open(input_path, "a") as f:
+            apply_move(state, score)
+            print(file=f)
+            to_csv(state, f)
 
-    with open(output_path, "a") as f:
-        f.write(
-            "[{},{}]->[{},{}]\n".format(
-                score[0][0], score[0][1], score[1][0], score[1][1]
+        with open(output_path, "a") as f:
+            f.write(
+                "[{},{}]->[{},{}]\n".format(
+                    score[0][0], score[0][1], score[1][0], score[1][1]
+                )
             )
-        )
+        player = player * -1
 
 
 if __name__ == "__main__":
