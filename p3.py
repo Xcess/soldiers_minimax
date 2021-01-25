@@ -110,7 +110,6 @@ def main():
     state = from_csv(input_path)
     player = 1
 
-    # print(f"Finished with score {score[2]}\nLast Move: {score[0]}->{score[1]}")
 
     while not game_over(state, player):
         score = minimax(state, math.inf, player)
@@ -126,6 +125,9 @@ def main():
                 )
             )
         player = player * -1
+    
+    print(f"Finished with score {score[2]}\nLast Move: {score[0]}->{score[1]}")
+
 
 
 if __name__ == "__main__":
