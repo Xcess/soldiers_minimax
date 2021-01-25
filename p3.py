@@ -126,7 +126,7 @@ def main():
             )
         player = player * -1
 
-    print(f"Finished with score {score[2]}\nLast Move: {score[0]}->{score[1]}")
+    print(f"Finished with score {evaluate(state)}")
 
 
 if __name__ == "__main__":
